@@ -11,6 +11,8 @@ function createWindow(): void {
     height: 600,
     x: width - 600,
     y: 60,
+    frame: false,
+    transparent: true,
     show: false,
     alwaysOnTop: true,
     autoHideMenuBar: true,
