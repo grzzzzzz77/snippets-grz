@@ -8,9 +8,7 @@ const Search: React.FC = () => {
   const [value, setValue] = useState('')
   const changeData = (value: string) => {
     setValue(value)
-    value.trim()
-      ? setData(codes.filter((item) => item.content.toLowerCase().includes(value.toLowerCase())))
-      : setData([])
+    setData(codes.filter((item) => item.content.toLowerCase().includes(value.trim().toLowerCase())))
   }
   return (
     <>

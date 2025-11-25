@@ -1,5 +1,6 @@
 import { DataType } from '@renderer/data'
 import { Dispatch, ReactNode, SetStateAction, createContext, useState } from 'react'
+import { codes } from '@renderer/data'
 
 interface ContextProps {
   data: DataType[]
@@ -10,6 +11,6 @@ interface Props {
   children: ReactNode
 }
 export const CodeProvider = ({ children }: Props) => {
-  const [data, setData] = useState<DataType[]>([])
+  const [data, setData] = useState<DataType[]>(codes)
   return <CodeContext.Provider value={{ data, setData }}>{children}</CodeContext.Provider>
 }
