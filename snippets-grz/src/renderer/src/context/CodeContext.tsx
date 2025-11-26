@@ -6,10 +6,13 @@ interface ContextProps {
   data: DataType[]
   setData: Dispatch<SetStateAction<DataType[]>>
 }
-export const CodeContext = createContext<ContextProps | undefined>(undefined)
+
 interface Props {
   children: ReactNode
 }
+
+export const CodeContext = createContext<ContextProps | undefined>(undefined)
+
 export const CodeProvider = ({ children }: Props) => {
   const [data, setData] = useState<DataType[]>(codes)
   return <CodeContext.Provider value={{ data, setData }}>{children}</CodeContext.Provider>
