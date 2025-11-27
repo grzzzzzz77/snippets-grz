@@ -6,6 +6,9 @@ import { ipcRenderer } from 'electron'
 const api = {
   hideWindow: () => {
     ipcRenderer.send('hideWindow')
+  },
+  shortCut: (type: string, shortCut: string) => {
+    ipcRenderer.send('shortCut', type, shortCut)
   }
 }
 

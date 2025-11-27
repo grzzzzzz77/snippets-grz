@@ -1,8 +1,18 @@
 import { useEffect, useState } from 'react'
-import useCode from './useCode'
+import { useShallow } from 'zustand/react/shallow'
+// import useCode from './useCode'
+import useStore from '../store/useStore'
+import { codes } from '@renderer/data'
 
 export default function useCodeSelect() {
-  const { data } = useCode()
+  // const { data } = useCode() //这是context共享数据的方式
+  const { data, setData, setValue } = useStore(
+    useShallow((state) => ({
+      data: state.data,
+      setData: state.setData,
+      setValue: state.setValue
+    }))
+  )
   const [id, setId] = useState<number>(1)
   const handleKeyDown = (e: KeyboardEvent) => {
     switch (e.key) {
@@ -28,11 +38,13 @@ export default function useCodeSelect() {
     }
   }
 
-  const selectCode = (id: number) => {
+  const selectCode = async (id: number) => {
     const content = data.find((item) => item.id == id)?.content
     if (content) {
-      navigator.clipboard.writeText(content)
+      await navigator.clipboard.writeText(content)
       window.api.hideWindow()
+      setData(codes)
+      setValue('')
     }
   }
   useEffect(() => {
