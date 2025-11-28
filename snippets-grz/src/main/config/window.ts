@@ -1,6 +1,7 @@
 import { join } from 'path'
 import { BrowserWindow, shell } from 'electron'
 import { is } from '@electron-toolkit/utils'
+import url from 'node:url'
 
 import icon from '../../../resources/icon.png?asset'
 
@@ -8,7 +9,7 @@ export function createWindow(): BrowserWindow {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
     width: 600,
-    height: 800,
+    height: 600,
     center: true,
     show: false,
     alwaysOnTop: true,
@@ -33,9 +34,20 @@ export function createWindow(): BrowserWindow {
   // HMR for renderer base on electron-vite cli.
   // Load the remote URL for development or the local html file for production.
   if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
-    mainWindow.loadURL(process.env['ELECTRON_RENDERER_URL'])
+    mainWindow.loadURL(process.env['ELECTRON_RENDERER_URL'] + '#/config')
   } else {
-    mainWindow.loadFile(join(__dirname, '../renderer/index.html'))
+    mainWindow.loadURL(
+      url.format({
+        //编译后的文件
+        pathname: join(__dirname, '../renderer/index.html'),
+        //协议
+        protocol: 'file',
+        //protocol 后面需要两个/
+        slashes: true,
+        //hash 的值
+        hash: 'config'
+      })
+    )
   }
 
   return mainWindow
