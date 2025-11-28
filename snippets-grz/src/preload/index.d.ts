@@ -6,6 +6,7 @@ declare global {
     api: {
       hideWindow: () => void
       shortCut: (type: string, shortCut: string) => void
+      setIgnoreMouseEvents: (isIgnore: boolean, options?: { forward: boolean }) => void
     }
   }
 }

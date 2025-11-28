@@ -13,7 +13,7 @@ export default function useCodeSelect() {
       setValue: state.setValue
     }))
   )
-  const [id, setId] = useState<number>(1)
+  const [id, setId] = useState<number>(0)
   const handleKeyDown = (e: KeyboardEvent) => {
     switch (e.key) {
       case 'ArrowUp':

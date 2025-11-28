@@ -31,6 +31,8 @@ const Search: React.FC = () => {
           <input
             className="w-full outline-none text-2xl text-slate-600 bg-slate-200"
             value={value}
+            autoFocus
+            placeholder="请输入"
             onChange={(e) => changeData(e.target.value)}
           />
         </section>

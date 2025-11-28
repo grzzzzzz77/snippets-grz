@@ -9,6 +9,9 @@ const api = {
   },
   shortCut: (type: string, shortCut: string) => {
     ipcRenderer.send('shortCut', type, shortCut)
+  },
+  setIgnoreMouseEvents: (isIgnore: boolean, options?: { forward: boolean }) => {
+    ipcRenderer.send('setIgnoreMouseEvents', isIgnore, options)
   }
 }
 
