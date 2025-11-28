@@ -12,8 +12,6 @@ function App(): React.JSX.Element {
       window.api.setIgnoreMouseEvents(false)
     })
     document.body.addEventListener('mouseover', (e: MouseEvent) => {
-      console.log(e.target)
-
       if (e.target === document.body) {
         window.api.setIgnoreMouseEvents(true, { forward: true })
       }

@@ -13,7 +13,7 @@ interface State {
 
 const useStore = create<State>()(
   immer((set) => ({
-    data: codes,
+    data: [],
     setData: (data: DataType[]) => set((state) => ({ data: data })),
     value: '',
     setValue: (value: string) => set((state) => ({ value: value }))

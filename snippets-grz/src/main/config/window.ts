@@ -1,19 +1,15 @@
 import { join } from 'path'
-import { BrowserWindow, shell, screen } from 'electron'
+import { BrowserWindow, shell } from 'electron'
 import { is } from '@electron-toolkit/utils'
 
 import icon from '../../../resources/icon.png?asset'
 
 export function createWindow(): BrowserWindow {
   // Create the browser window.
-  const { width } = screen.getPrimaryDisplay().workAreaSize
   const mainWindow = new BrowserWindow({
     width: 600,
-    height: 350,
-    x: width - 600,
-    y: 60,
-    frame: false,
-    transparent: true,
+    height: 800,
+    center: true,
     show: false,
     alwaysOnTop: true,
     autoHideMenuBar: true,

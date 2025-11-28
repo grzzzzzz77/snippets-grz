@@ -43,7 +43,7 @@ export default function useCodeSelect() {
     if (content) {
       await navigator.clipboard.writeText(content)
       window.api.hideWindow()
-      setData(codes)
+      setData([])
       setValue('')
     }
   }

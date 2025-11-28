@@ -27,6 +27,7 @@ const Search: React.FC = () => {
             fill="#333"
             strokeWidth={4}
             className="cursor-pointer"
+            onClick={() => window.api.openConfigWindow()}
           />
           <input
             className="w-full outline-none text-2xl text-slate-600 bg-slate-200"
