@@ -10,7 +10,19 @@ const router = createHashRouter([
   },
   {
     path: '/config',
-    element: lazyLoad(lazy(() => import('@renderer/pages/config')))
+    element: lazyLoad(lazy(() => import('@renderer/pages/config'))),
+    children: [
+      {
+        path: '',
+        element: lazyLoad(lazy(() => import('@renderer/pages/category'))),
+        children: [
+          {
+            index: true,
+            element: lazyLoad(lazy(() => import('@renderer/pages/content')))
+          }
+        ]
+      }
+    ]
   }
 ])
 

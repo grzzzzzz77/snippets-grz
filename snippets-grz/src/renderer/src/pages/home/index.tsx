@@ -15,6 +15,7 @@ function Home(): React.JSX.Element {
         window.api.setIgnoreMouseEvents(true, { forward: true })
       }
     })
+    window.api.openConfigWindow()
   }, [])
 
   return (

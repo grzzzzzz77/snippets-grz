@@ -1,5 +1,5 @@
 import { join } from 'path'
-import { BrowserWindow, shell } from 'electron'
+import { BrowserWindow, shell, screen } from 'electron'
 import { is } from '@electron-toolkit/utils'
 import url from 'node:url'
 
@@ -7,11 +7,15 @@ import icon from '../../../resources/icon.png?asset'
 
 export function createWindow(): BrowserWindow {
   // Create the browser window.
+  const { width: screenWidth } = screen.getPrimaryDisplay().workAreaSize
+  const width = 500
   const mainWindow = new BrowserWindow({
-    width: 600,
-    height: 600,
-    center: true,
+    width,
+    height: 500,
+    x: screenWidth - width,
+    y: 60,
     show: false,
+
     alwaysOnTop: true,
     autoHideMenuBar: true,
     ...(process.platform === 'linux' ? { icon } : {}),

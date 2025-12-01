@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+.category-page {
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    grid-template: 
+        'categories content' auto
+        'nav content' 50px/120px auto;
+
+    .categories{
+        grid-area: categories;
+        border-right: 1px solid #ccc;
+    }
+
+    .content{
+        grid-area: content;
+    }
+
+    .nav{
+        grid-area: nav;
+        border-top: 1px solid #ccc;
+        border-right: 1px solid #ccc;
+    }
+}

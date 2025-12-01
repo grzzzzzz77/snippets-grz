@@ -1,5 +1,9 @@
-
+import { Outlet } from 'react-router'
 
 export default function Config() {
-  return <div>Config</div>
+  return (
+    <>
+      <Outlet />
+    </>
+  )
 }
