@@ -15,6 +15,13 @@ const api = {
   },
   openConfigWindow: () => {
     ipcRenderer.send('openConfigWindow')
+  },
+  sql: (
+    sql: string,
+    type: 'findAll' | 'findOne' | 'insert' | 'update' | 'del' | 'config',
+    params?: any
+  ) => {
+    return ipcRenderer.invoke('sql', sql, type, params)
   }
 }
 

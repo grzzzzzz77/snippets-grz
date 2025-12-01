@@ -17,6 +17,12 @@ const Search: React.FC = () => {
     setValue(value)
     setData(codes.filter((item) => item.content.toLowerCase().includes(value.trim().toLowerCase())))
   }
+
+  const query = async () => {
+    const res = await window.api.sql('select * from config ', 'findAll')
+    console.log(res)
+  }
+
   return (
     <>
       <div className="bg-slate-50 p-3 rounded-lg drag">
@@ -27,7 +33,7 @@ const Search: React.FC = () => {
             fill="#333"
             strokeWidth={4}
             className="cursor-pointer"
-            onClick={() => window.api.openConfigWindow()}
+            onClick={() => query()}
           />
           <input
             className="w-full outline-none text-2xl text-slate-600 bg-slate-200"
