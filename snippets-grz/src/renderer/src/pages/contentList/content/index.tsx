@@ -1,12 +1,50 @@
-export default function Content(props) {
-  console.log(props.content)
+import { useEffect, useState } from 'react'
+import { Button } from 'antd'
+
+interface IContent {
+  title: string
+  content: string
+  id: string
+  category_id: string
+}
+
+export default function Content(props: any) {
+  const [content, setContent] = useState({} as IContent)
+  useEffect(() => {
+    setContent(props.content)
+  }, [props.content])
+
+  const save = async (currentContent: IContent) => {
+    await window.api.sql('update contents set title = ?, content = ? where id = ?', 'update', [
+      currentContent.title,
+      currentContent.content,
+      currentContent.id
+    ])
+    props.getContents()
+  }
+
+  const changeContent = async (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    type: string
+  ) => {
+    const newContent = { ...content, [type]: e.target.value }
+    setContent(newContent)
+    await save(newContent)
+  }
+
   return (
     <>
-      <main className="p-2">
-        <h1 className="text-base font-bold text-slate-600 opacity-95">{props.content?.title}</h1>
-        <div className="text-sm text-slate-500 opacity-95 mt-2 leading-relaxed">
-          {props.content?.content}
-        </div>
+      <main className="p-2 flex flex-col h-screen gap-4">
+        <input
+          className="font-bold outline-none"
+          value={content?.title}
+          onChange={(e) => changeContent(e, 'title')}
+        />
+        <textarea
+          className="flex-1 outline-none opacity-90"
+          value={content?.content}
+          onChange={(e) => changeContent(e, 'content')}
+        />
       </main>
     </>
   )

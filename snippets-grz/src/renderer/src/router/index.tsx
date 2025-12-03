@@ -21,8 +21,7 @@ const router = createHashRouter([
         children: [
           {
             path: 'content/:cid',
-            element: lazyLoad(lazy(() => import('@renderer/pages/contentList'))),
-            loader: contentLoader
+            element: lazyLoad(lazy(() => import('@renderer/pages/contentList')))
           }
         ]
       }
