@@ -3,7 +3,6 @@ import { lazyLoad } from './lazyLoad'
 import Home from '@renderer/pages/home'
 import { lazy } from 'react'
 import categoryLoader from '@renderer/pages/category/categoryLoader'
-import contentLoader from '@renderer/pages/contentList/contentLoader'
 
 const router = createHashRouter([
   {
