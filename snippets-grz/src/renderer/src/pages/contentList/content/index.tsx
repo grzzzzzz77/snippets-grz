@@ -8,6 +8,8 @@ interface IContent {
 }
 
 export default function Content(props: any) {
+  console.log('xxxxx', props)
+
   const [content, setContent] = useState<Partial<IContent>>({})
   useEffect(() => {
     if (props.content) {
@@ -38,16 +40,21 @@ export default function Content(props: any) {
   return (
     <>
       <main className="p-2 flex flex-col h-screen gap-4">
-        <input
-          className="font-bold outline-none"
-          value={content?.title || ''}
-          onChange={(e) => changeContent(e, 'title')}
-        />
-        <textarea
-          className="flex-1 outline-none opacity-90"
-          value={content?.content || ''}
-          onChange={(e) => changeContent(e, 'content')}
-        />
+        {props.content && (
+          <>
+            <input
+              className="font-bold outline-none"
+              value={content?.title || ''}
+              onChange={(e) => changeContent(e, 'title')}
+            />
+            <textarea
+              className="flex-1 outline-none opacity-90"
+              value={content?.content || ''}
+              placeholder="请输入内容"
+              onChange={(e) => changeContent(e, 'content')}
+            />
+          </>
+        )}
       </main>
     </>
   )

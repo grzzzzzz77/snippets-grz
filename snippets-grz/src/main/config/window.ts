@@ -16,7 +16,7 @@ export function createWindow(): BrowserWindow {
     y: 60,
     show: false,
 
-    alwaysOnTop: true,
+    alwaysOnTop: false,
     autoHideMenuBar: true,
     ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {

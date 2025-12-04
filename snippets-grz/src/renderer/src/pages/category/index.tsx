@@ -1,5 +1,5 @@
-import { Link, NavLink, Outlet, useLoaderData, useNavigate } from 'react-router'
-import { useState, useEffect } from 'react'
+import { NavLink, Outlet, useLoaderData } from 'react-router'
+import { useState } from 'react'
 import './category.less'
 import { Add, DatabaseSetting, FolderClose, AllApplication } from '@icon-park/react'
 
@@ -15,7 +15,7 @@ export default function Category() {
           <NavLink
             to={`/config/category/content`}
             end
-            className={`font-bold block ${current === undefined ? 'bg-amber-500! text-white! mx-1 rounded-md' : ''}`}
+            className={`font-bold block ${current === undefined ? 'bg-blue-300! text-white! mx-1 rounded-md' : ''}`}
             onClick={() => setCurrent(undefined)}
           >
             <div className="flex items-center gap-1 mb-1 pl-1">
@@ -26,7 +26,7 @@ export default function Category() {
           {categories.map((category: any) => (
             <NavLink
               to={`/config/category/content/${category.id}`}
-              className={` p-1 truncate cursor-pointer block ${current === category.id ? 'bg-amber-500! text-white! mx-1 rounded-md' : ''}`}
+              className={` p-1 truncate cursor-pointer block ${current === category.id ? 'bg-blue-300! text-white! mx-1 rounded-md' : ''}`}
               key={category.id}
               onClick={() => setCurrent(category.id)}
             >
