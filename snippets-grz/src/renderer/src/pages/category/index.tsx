@@ -1,27 +1,32 @@
-import { Link, Outlet, useLoaderData, useNavigate } from 'react-router'
+import { Link, NavLink, Outlet, useLoaderData, useNavigate } from 'react-router'
 import { useState, useEffect } from 'react'
 import './category.less'
-import { Add, DatabaseSetting, FolderClose } from '@icon-park/react'
+import { Add, DatabaseSetting, FolderClose, AllApplication } from '@icon-park/react'
 
 export default function Category() {
-  const [current, setCurrent] = useState()
-  const navigate = useNavigate()
+  const [current, setCurrent] = useState<string | undefined>(undefined)
   const categories = useLoaderData()
 
-  useEffect(() => {
-    if (categories.length > 0) {
-      setCurrent(categories[0].id)
-      navigate(`/config/category/content/${categories[0].id}`)
-    }
-  }, [categories])
   return (
     <>
       <main className="category-page">
         <div className="categories bg-slate-100 mt-2 text-slate-700 overflow-y-auto">
+          <div className="px-2 mt-2 opacity-90 mb-1">快捷操作</div>
+          <NavLink
+            to={`/config/category/content`}
+            end
+            className={`font-bold block ${current === undefined ? 'bg-amber-500! text-white! mx-1 rounded-md' : ''}`}
+            onClick={() => setCurrent(undefined)}
+          >
+            <div className="flex items-center gap-1 mb-1 pl-1">
+              <AllApplication theme="outline" size="16" strokeWidth={5} />
+              <div className="truncate">所有片段</div>
+            </div>
+          </NavLink>
           {categories.map((category: any) => (
-            <Link
+            <NavLink
               to={`/config/category/content/${category.id}`}
-              className={`p-1 truncate cursor-pointer block ${current === category.id ? 'bg-amber-500! text-white! mx-1 rounded-md' : ''}`}
+              className={` p-1 truncate cursor-pointer block ${current === category.id ? 'bg-amber-500! text-white! mx-1 rounded-md' : ''}`}
               key={category.id}
               onClick={() => setCurrent(category.id)}
             >
@@ -29,7 +34,7 @@ export default function Category() {
                 <FolderClose theme="outline" size="12" strokeWidth={3} />
                 <div className="truncate">{category.name}</div>
               </div>
-            </Link>
+            </NavLink>
           ))}
         </div>
         <div className="nav bg-slate-100 flex justify-around items-center">

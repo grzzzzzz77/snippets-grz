@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { Button } from 'antd'
 
 interface IContent {
   title: string
@@ -9,10 +8,14 @@ interface IContent {
 }
 
 export default function Content(props: any) {
-  const [content, setContent] = useState({} as IContent)
+  const [content, setContent] = useState<Partial<IContent>>({})
   useEffect(() => {
-    setContent(props.content)
-  }, [props.content])
+    if (props.content) {
+      setContent(props.content)
+    } else {
+      setContent({})
+    }
+  }, [props])
 
   const save = async (currentContent: IContent) => {
     await window.api.sql('update contents set title = ?, content = ? where id = ?', 'update', [
@@ -29,7 +32,7 @@ export default function Content(props: any) {
   ) => {
     const newContent = { ...content, [type]: e.target.value }
     setContent(newContent)
-    await save(newContent)
+    await save(newContent as IContent)
   }
 
   return (
@@ -37,12 +40,12 @@ export default function Content(props: any) {
       <main className="p-2 flex flex-col h-screen gap-4">
         <input
           className="font-bold outline-none"
-          value={content?.title}
+          value={content?.title || ''}
           onChange={(e) => changeContent(e, 'title')}
         />
         <textarea
           className="flex-1 outline-none opacity-90"
-          value={content?.content}
+          value={content?.content || ''}
           onChange={(e) => changeContent(e, 'content')}
         />
       </main>

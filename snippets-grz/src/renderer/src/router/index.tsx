@@ -19,7 +19,7 @@ const router = createHashRouter([
         loader: categoryLoader,
         children: [
           {
-            path: 'content/:cid',
+            path: 'content/:cid?',
             element: lazyLoad(lazy(() => import('@renderer/pages/contentList')))
           }
         ]
