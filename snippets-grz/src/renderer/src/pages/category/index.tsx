@@ -1,9 +1,11 @@
-import { NavLink, Outlet, useLoaderData, useRevalidator } from 'react-router'
+import { NavLink, Outlet, useLoaderData, useRevalidator, Link } from 'react-router'
 import { useState } from 'react'
 import './category.less'
-import { Add, DatabaseSetting, FolderClose, AllApplication, Edit } from '@icon-park/react'
+import { Add, DatabaseSetting, FolderClose, AllApplication, Edit, Delete } from '@icon-park/react'
 import { useContextMenu } from 'mantine-contextmenu'
-import { Input, Modal } from 'antd'
+import { Input, message, Modal } from 'antd'
+
+const { confirm } = Modal
 
 export default function Category() {
   const [current, setCurrent] = useState<string | undefined>(undefined)
@@ -32,6 +34,20 @@ export default function Category() {
       revalidator.revalidate()
       handleCancel()
     }
+  }
+
+  const deleteCategory = async (id: string) => {
+    confirm({
+      title: '你确定要删除吗?',
+      content: '删除后将无法恢复',
+      okText: '确定',
+      okType: 'danger',
+      cancelText: '取消',
+      onOk() {
+        window.api.sql(`delete from categories where id = ${id}`, 'del')
+        revalidator.revalidate()
+      }
+    })
   }
 
   return (
@@ -66,6 +82,14 @@ export default function Category() {
                       setIsModalOpen(true)
                       setName(category.name)
                     }
+                  },
+                  {
+                    key: 'delete',
+                    title: '删除',
+                    icon: <Delete theme="outline" size="18" strokeWidth={2} />,
+                    onClick: () => {
+                      deleteCategory(category.id)
+                    }
                   }
                 ],
                 { className: 'contextMenu' }
@@ -86,7 +110,9 @@ export default function Category() {
             className="cursor-pointer"
             onClick={() => addCategory()}
           />
-          <DatabaseSetting theme="outline" size="20" strokeWidth={2} className="cursor-pointer" />
+          <Link to="/config">
+            <DatabaseSetting theme="outline" size="20" strokeWidth={2} className="cursor-pointer" />
+          </Link>
         </div>
         <div className="content">
           <Outlet />

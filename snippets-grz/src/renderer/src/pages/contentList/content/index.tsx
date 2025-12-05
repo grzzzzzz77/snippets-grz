@@ -8,8 +8,6 @@ interface IContent {
 }
 
 export default function Content(props: any) {
-  console.log('xxxxx', props)
-
   const [content, setContent] = useState<Partial<IContent>>({})
   useEffect(() => {
     if (props.content) {
